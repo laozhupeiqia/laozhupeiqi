@@ -1,0 +1,37 @@
+a{
+	text-decoration:none;
+}
+a:hover{
+	background-color: coral;
+}
+.head{
+	 text-align: center;
+	 font-size: 3vw;
+}
+.zpbox1{
+	display: flex;/* 第一排作品盒子*/
+}
+.zpbox2{
+	display: flex;/* 第二排作品盒子*/
+	margin-top: 0.5vw;
+}
+.zp{
+	width: 20vw;/* 作品题目文字 */
+	height: 20vw;
+	flex: 1;
+	text-align: center;
+	margin-left: 0.5vw;
+	background-color: aquamarine;
+}
+.zp>p{
+	margin-top: 2vw;
+}
+.zpimg{
+	margin-top: 2vw;/* 装作品的盒子 */
+	width: 100%;
+	height: ;
+}
+.zpimg>img{
+	width: 20vw;/* 作品盒子中的图片 */
+	height: 10vw;
+}

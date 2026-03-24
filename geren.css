@@ -35,3 +35,7 @@ a:hover{
 	width: 20vw;/* 作品盒子中的图片 */
 	height: 10vw;
 }
+.zpimg>video{
+	width: 20vw;
+	height: 10vw;
+}

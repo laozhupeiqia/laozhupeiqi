@@ -14,8 +14,10 @@
 			<div class="zp1 zp">
 			<h4>青春猪头少年不会梦到ACM学姐（galgame）</h4> 
 			<div class="zpimg">
-				<video controls preload="metadata">
-					<source src="Video/ztsn.mp4" type="video/mp4">
+				<img class="video-cover" src="imgs/ztsn.png" alt="">
+				<div class="video-hint">点击播放</div>
+				<video controls preload="metadata" poster="imgs/ztsn.png">
+					<source src="http://8.145.61.7/Video/ztsn.mp4" type="video/mp4">
 					你的浏览器不支持 video 标签。
 				</video>
 			</div>
@@ -45,7 +47,14 @@
 			</div>
 			
 			<div class="zp6 zp"><h4>师弟觉醒（模拟经营）</h4>
-			<div class="zpimg"><img src="imgs/sdjx.jpg" alt=""></div>
+			<div class="zpimg">
+				<img class="video-cover" src="imgs/sdjx.jpg" alt="">
+				<div class="video-hint">点击播放</div>
+				<video controls preload="metadata" poster="imgs/sdjx.jpg">
+					<source src="http://8.145.61.7/Video/sdjx.mp4" type="video/mp4">
+					你的浏览器不支持 video 标签。
+				</video>
+			</div>
 			<p><a href="https://pan.baidu.com/s/1IqQ7lVgtvOzvDFZN4w-0AA?pwd=1419">视频链接</a></p>
 			</div>
 			
@@ -105,5 +114,46 @@
 		 </div>
 		<div></div>
 		<div></div>
+
+		<script>
+			const videos = document.querySelectorAll('video');
+
+			// 保证同一时间只播放一个视频 + 让暂停时显示封面图
+			document.addEventListener('play', function (event) {
+				const v = event.target;
+				if (!v || v.tagName !== 'VIDEO') return;
+
+				const cover = v.parentElement && v.parentElement.querySelector('.video-cover');
+				if (cover) cover.classList.add('hidden');
+
+					const hint = v.parentElement && v.parentElement.querySelector('.video-hint');
+					if (hint) hint.classList.add('hidden');
+
+				document.querySelectorAll('video').forEach(function (other) {
+					if (other !== v && !other.paused) other.pause();
+				});
+			}, true);
+
+			videos.forEach(function (v) {
+				const cover = v.parentElement && v.parentElement.querySelector('.video-cover');
+					const hint = v.parentElement && v.parentElement.querySelector('.video-hint');
+				if (!cover) return;
+
+				// 点击封面图时开始播放
+				cover.addEventListener('click', function () {
+					v.play();
+				});
+
+				// 暂停/结束时重新显示封面图
+				v.addEventListener('pause', function () {
+					cover.classList.remove('hidden');
+						if (hint) hint.classList.remove('hidden');
+				});
+				v.addEventListener('ended', function () {
+					cover.classList.remove('hidden');
+						if (hint) hint.classList.remove('hidden');
+				});
+			});
+		</script>
 	</body>
 </html>

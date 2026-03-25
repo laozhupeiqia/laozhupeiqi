@@ -6,36 +6,98 @@ a:hover{
 }
 .head{
 	 text-align: center;
-	 font-size: 3vw;
+	 font-size: clamp(18px, 3vw, 36px);
 }
 .zpbox1{
 	display: flex;/* 第一排作品盒子*/
+	flex-wrap: wrap;
 }
 .zpbox2{
 	display: flex;/* 第二排作品盒子*/
 	margin-top: 0.5vw;
+	flex-wrap: wrap;
 }
 .zp{
-	width: 20vw;/* 作品题目文字 */
-	height: 20vw;
-	flex: 1;
+	width: clamp(200px, 20vw, 320px);/* 作品题目盒子 */
+	height: clamp(200px, 20vw, 320px);
+	flex: 1 1 260px;
 	text-align: center;
 	margin-left: 0.5vw;
 	background-color: aquamarine;
+	overflow: hidden;/* 防止链接文字跑出盒子 */
+	display: flex;
+	flex-direction: column;
+}
+.zp>h4{
+	margin: 0;
+	padding: 0 0.5vw;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .zp>p{
-	margin-top: 2vw;
+	margin-top: clamp(8px, 1.2vw, 16px);
+	padding: 0 0.5vw;
+	margin-bottom: 0;
+	width: 100%;
+}
+.zp>p a{
+	display: inline-block;
+	max-width: 100%;
+	white-space: nowrap;/* 防止长文本溢出换行导致布局抖动 */
+	overflow: hidden;
+	text-overflow: ellipsis;/* 超出显示省略号 */
+	vertical-align: bottom;
 }
 .zpimg{
 	margin-top: 2vw;/* 装作品的盒子 */
 	width: 100%;
-	height: ;
+	/* 让封面/视频永远保持 2:1 比例，不受不同屏幕影响 */
+	aspect-ratio: 2 / 1;
+	height: auto;
+	position: relative;
+	overflow: hidden;
 }
 .zpimg>img{
-	width: 20vw;/* 作品盒子中的图片 */
-	height: 10vw;
+	width: 100%;/* 作品盒子中的图片 */
+	height: 100%;
+	object-fit: cover;
 }
 .zpimg>video{
-	width: 20vw;
-	height: 10vw;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* 视频封面层：播放时隐藏，暂停/结束时显示 */
+.zpimg>video{
+	z-index: 1;
+}
+.video-cover{
+	position: absolute;
+	inset: 0;
+	object-fit: cover;
+	z-index: 2;
+	cursor: pointer;
+}
+.video-cover.hidden{
+	display: none;
+}
+
+/* 封面旁提示：播放前显示，播放后隐藏 */
+.video-hint{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 10%;
+	text-align: center;
+	z-index: 3;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: clamp(12px, 1.5vw, 18px);
+	text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+	pointer-events: none;/* 让点击直接落到封面图片上 */
+}
+.video-hint.hidden{
+	display: none;
 }

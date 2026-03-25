@@ -34,12 +34,17 @@ a:hover{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: clamp(14px, 1.8vw, 20px);
 }
 .zp>p{
-	margin-top: clamp(8px, 1.2vw, 16px);
+	margin-top: clamp(8px, 1.2vw, 14px);
 	padding: 0 0.5vw;
 	margin-bottom: 0;
 	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: clamp(12px, 1.5vw, 16px);
 }
 .zp>p a{
 	display: inline-block;
@@ -50,7 +55,7 @@ a:hover{
 	vertical-align: bottom;
 }
 .zpimg{
-	margin-top: 2vw;/* 装作品的盒子 */
+	margin-top: clamp(10px, 2vw, 16px);/* 装作品的盒子 */
 	width: 100%;
 	/* 让封面/视频永远保持 2:1 比例，不受不同屏幕影响 */
 	aspect-ratio: 2 / 1;
@@ -67,11 +72,16 @@ a:hover{
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	opacity: 0;/* 默认由封面遮住，避免竖屏/加载时露馅 */
+	transition: opacity 0.2s ease;
 }
 
 /* 视频封面层：播放时隐藏，暂停/结束时显示 */
 .zpimg>video{
 	z-index: 1;
+}
+.zpimg.playing>video{
+	opacity: 1;
 }
 .zpimg.portrait>video{
 	/* 竖屏视频不能用 cover，否则会上下裁切，改为完整显示 */

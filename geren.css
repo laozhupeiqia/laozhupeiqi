@@ -73,6 +73,14 @@ a:hover{
 .zpimg>video{
 	z-index: 1;
 }
+.zpimg.portrait>video{
+	/* 竖屏视频不能用 cover，否则会上下裁切，改为完整显示 */
+	object-fit: contain;
+	background-color: #000;
+}
+.zpimg.portrait>.video-cover{
+	object-fit: contain;
+}
 .video-cover{
 	position: absolute;
 	inset: 0;

@@ -47,23 +47,21 @@ a:hover {
 	letter-spacing: 0.04em;
 }
 
-.zpbox1 {
-	display: flex;
-	flex-wrap: wrap;
-	gap: clamp(10px, 1.2vw, 16px);
+.zpbox1,
+.zpbox2 {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(8px, 1.2vw, 16px);
 }
 
 .zpbox2 {
-	display: flex;
-	flex-wrap: wrap;
-	gap: clamp(10px, 1.2vw, 16px);
-	margin-top: clamp(10px, 1.2vw, 16px);
+	margin-top: clamp(8px, 1.2vw, 16px);
 }
 
 .zp {
-	width: clamp(200px, 20vw, 320px);
-	height: clamp(200px, 20vw, 320px);
-	flex: 1 1 260px;
+	min-width: 0;
+	width: auto;
+	height: auto;
 	text-align: center;
 	background-color: var(--bg-card);
 	border: 1px solid var(--border);
@@ -73,6 +71,20 @@ a:hover {
 	display: flex;
 	flex-direction: column;
 	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+@media (max-width: 700px) {
+	.zpbox1,
+	.zpbox2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 420px) {
+	.zpbox1,
+	.zpbox2 {
+		grid-template-columns: 1fr;
+	}
 }
 
 .zp:hover {
